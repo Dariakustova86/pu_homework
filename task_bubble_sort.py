@@ -8,4 +8,3 @@ def bubble_sort(lst):
 	return lst
 
 	
-lst = bubble_sort(1, 78, 98, 4, 2, 67)
