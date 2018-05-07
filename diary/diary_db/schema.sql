@@ -1,7 +1,7 @@
 CREATE TABLE IF NOT EXISTS diary (
 	id	INTEGER PRIMARY KEY AUTOINCREMENT,
 	name	TEXT NOT NULL,
-	descrip TEXT,
-	term	TEXT,
+	descrip TEXT NOT NULL,
+	term	TEXT NOT NULL,
 	shape TEXT DEFAULT 'Not complete'
 )

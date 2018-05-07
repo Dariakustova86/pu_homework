@@ -72,7 +72,17 @@ def add(conn, name, descrip, term):
 		pk = cursor.lastrowid
 		cursor = conn.execute(SQL_SELECT_TASK_BY_PK, (pk,))
 		return cursor.fetchone()
-
+		
+def complete(conn, id, shape):
+	with conn:
+		conn.execute(SQL_UPDATE_TASK_SHAPE, (shape, id,))
+		
+		
+def restart(conn, id):
+	with conn:
+		cursor = conn.execute(SQL_UPDATE_TASK_SHAPE, ('Not complete', id,))
+	
+		
 def update_name(conn, id, name):
 	if not name:
 		raise RuntimeError("Task name can't be empty.")
@@ -88,13 +98,7 @@ def update_term(conn, id, term):
 	with conn:
 		conn.execute(SQL_UPDATE_TASK_TERM, (term, id,))
 		
-def complete(conn, id):
-	with conn:
-		conn.execute(SQL_SELECT_TASK_BY_SHAPE, ('Complete', ))
-		
-def restart(conn, id):
-	with conn:
-		cursor = conn.execute(SQL_SELECT_TASK_BY_SHAPE, ('Not complete', id,))
+
 		
 		
 		
