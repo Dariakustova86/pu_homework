@@ -1,7 +1,7 @@
 import json
 def http_headers_to_json(headers, results):
+	data = {}
 	with open(headers) as f:
-		data = {}
 		element = f.readline().strip().split(' ')
 		if element[0] == 'HTTP/1.0' or 'HTTP/1.1':
 			data['protocol'] = element[0]
