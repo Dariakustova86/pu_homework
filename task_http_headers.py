@@ -1,13 +1,17 @@
 import json
 def http_headers_to_json(headers, results):
 	data = {}
-	with open(headers) as f:
+	with open('headers.txt') as f:
 		element = f.readline().strip().split(' ')
-		if element[0] == 'HTTP/1.0' or 'HTTP/1.1':
+		if element[0].startswith('HTTP/1.0'): 
 			data['protocol'] = element[0]
 			data['status_code'] = element[1]
 			data['status_message'] = element[2]
-		elif element[0] == 'HTTP/2':
+		elif element[0].startswith('HTTP/1.1'):
+			data['protocol'] = element[0]
+			data['status_code'] = element[1]
+			data['status_message'] = element[2]
+		elif element[0].startswith('HTTP/2'):
 			data['protocol'] = element[0]
 			data['status_code'] = element[1]
 		else:
@@ -19,7 +23,7 @@ def http_headers_to_json(headers, results):
 				elem = string.replace('\n', '').split(': ')
 				data[elem[0]] = elem[1]
 	
-	with open(results, 'w') as f:
+	with open('results.json', 'w') as f:
 		json.dump(data, f, indent=4)
 	
 	
