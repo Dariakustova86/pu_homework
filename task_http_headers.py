@@ -5,20 +5,22 @@ def http_headers_to_json(headers, results):
 	with open(headers) as f:
 		element = f.readline().strip().split(' ')
 		
-		if element[0].startswith('HTTP/1.0'): 
-			if len(element)>1:
-				data['protocol'] = element[0]
-				data['status_code'] = element[1]
-			elif len(element)>2:
-				data['status_message'] = ' '.join(element[2::])
+		if element[0].startswith('HTTP/1.0'):
+			data['protocol'] = element[0]
+			data['status_code'] = element[1]
+			data['status_message'] = element[2]
+			if len(element) > 3:
+				for i in range(3, len(element)):
+					data['status_message'] +=' ' + element[i]
 				
 		elif element[0].startswith('HTTP/1.1'):
-			if len(element)>1:
-				data['protocol'] = element[0]
-				data['status_code'] = element[1]
-			elif len(element)>2:
-				data['status_message'] = ' '.join(element[2::])
-				
+			data['protocol'] = element[0]
+			data['status_code'] = element[1]
+			data['status_message'] = element[2]
+			if len(element) > 3:
+				for i in range(3, len(element)):
+					data['status_message'] +=' ' + element[i]
+					
 		elif element[0].startswith('HTTP/2'):
 			data['protocol'] = element[0]
 			data['status_code'] = element[1]
