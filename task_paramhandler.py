@@ -4,7 +4,7 @@ import json
 import pickle
 
 
-class ParamHandlerEx(BaseEx):
+class ParamHandlerException(BaseException):
     def __init__(self, *args, **kwargs):
         super().__init__(self, *args, **kwargs)
 
