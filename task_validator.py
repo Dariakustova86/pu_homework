@@ -26,11 +26,9 @@ class Validator(metaclass=ABCMeta):
         Validator.types[name] = klass
 		
 class EMailValidator(Validator):
-	
 	def validate(self, value):
 		if '@' in value:
-			return True
-			
+			return True	
 		else:
 			return False
 		
